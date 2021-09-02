@@ -6,14 +6,31 @@
 //
 
 import UIKit
+import Firebase
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
+  var remoteConfig = RemoteConfig.remoteConfig()
+  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    
+    FirebaseApp.configure()
+    
+    if #available(iOS 10.0, *) {
+    UNUserNotificationCenter.current().delegate = self
+      
+    let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+      
+    UNUserNotificationCenter.current().requestAuthorization (options: authOptions, completionHandler: {_, _ in })
+    } else {
+    let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+      
+    application.registerUserNotificationSettings(settings)
+    }
+    
+    Messaging.messaging().delegate = self
+    application.registerForRemoteNotifications()
+    
     return true
   }
 
@@ -30,7 +47,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
   }
-
-
 }
 

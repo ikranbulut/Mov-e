@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  Mov-e
+
+  Created by Mac on 30.08.2021.
+  
+*/
+
+//MARK: - Error
+"error" = "Error";
+"error.newtorkingSubtitle" = "There is no internet connection. Please check your cellular or Wi-fi connection.";
+"error.responseSubtitle" = "Films not getting";
+
+"film.imdbRating" = "Imdb Rating: ";
+"film.time" = "Time: ";
+
+"filmDetail.released" = "Relased: ";
+"filmDetail.runtime" = "Runtime: ";
+"filmDetail.genre" = "Genre: ";
+"filmDetail.director" = "Director: ";
